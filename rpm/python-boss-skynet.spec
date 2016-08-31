@@ -28,6 +28,7 @@ make
 %install
 make PREFIX=%{_prefix} DESTDIR=%{buildroot} install
 mkdir -p %{buildroot}/var/log/supervisor
+chmod 770 %{buildroot}/var/log/supervisor
 
 %clean
 rm -rf $RPM_BUILD_ROOT
