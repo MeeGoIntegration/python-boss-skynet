@@ -11,7 +11,7 @@ Obsoletes: boss-skynet < 0.6.0
 Provides: boss-skynet
 BuildRequires: python, python-distribute, supervisor
 Requires: python, python-ruote-amqp >= 2.1.0, python-amqplib, supervisor, python-setproctitle
-Requires(post): pwdutils
+Requires(post): /usr/sbin/useradd
 BuildArch: noarch
 Vendor: David Greaves <david@dgreaves.com>
 Url: https://github.com/MeeGoIntegration/python-boss-skynet
