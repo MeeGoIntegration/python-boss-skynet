@@ -5,8 +5,8 @@ Priority: optional
 Build-Depends: python (>= 2.6.0), python-setuptools (>= 0.6b3), debhelper (>= 7.0.50~), python-support (>= 0.8.4), python-sphinx, bash-completion
 Standards-Version: 3.9.2
 Homepage: http://wiki.meego.com/Release_Infrastructure/BOSS/SkyNET
-Vcs-Git: git://gitorious.org/meego-infrastructure-tools/boss-python-skynet.git
-Vcs-Browser: http://meego.gitorious.org/meego-infrastructure-tools/boss-python-skynet
+Vcs-Git: https://github.com/MeeGoIntegration/python-boss-skynet.git
+Vcs-Browser: https://github.com/MeeGoIntegration/python-boss-skynet
 
 Package: python-boss-skynet
 Architecture: all
