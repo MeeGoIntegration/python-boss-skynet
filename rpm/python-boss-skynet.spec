@@ -2,19 +2,19 @@ Summary: Boss Python SkyNET
 Name: python-boss-skynet
 Version: 0.6.3
 Release: 1
-Source0: %{name}_%{version}.orig.tar.gz
+Source0: %{name}-%{version}.tar.gz
 License: UNKNOWN
 Group: Development/Libraries
 BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
 Prefix: %{_prefix}
 Obsoletes: boss-skynet < 0.6.0
 Provides: boss-skynet
-BuildRequires: python, python-distribute, supervisor
+BuildRequires: python, python-setuptools, supervisor
 Requires: python, python-ruote-amqp >= 2.1.0, python-amqplib, supervisor, python-setproctitle
-Requires(post): pwdutils
+Requires(post): /usr/sbin/useradd
 BuildArch: noarch
 Vendor: David Greaves <david@dgreaves.com>
-Url: http://github.com/lbt/boss-python-skynet/
+Url: https://github.com/MeeGoIntegration/python-boss-skynet
 
 %description
 UNKNOWN
@@ -28,6 +28,7 @@ make
 %install
 make PREFIX=%{_prefix} DESTDIR=%{buildroot} install
 mkdir -p %{buildroot}/var/log/supervisor
+chmod 770 %{buildroot}/var/log/supervisor
 
 %clean
 rm -rf $RPM_BUILD_ROOT
