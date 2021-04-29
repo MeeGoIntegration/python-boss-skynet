@@ -44,5 +44,14 @@ class ExoParticipant(Participant):
         """
         self.handler.handle_wi_control(WorkItemCtrl("cancel"))
 
+    # This is called from the main thread to clean up.
+    def stop(self, workitem):
+        """Workitem cancel.
+
+        This method calls the
+        ParticipantHandler.handle_lifecycle_control() method.
+        """
+        self.handler.handle_lifecycle_control(WorkItemCtrl("stop"))
+
     def send_to_engine(self, witem):
         self.reply_to_engine(workitem=witem)
