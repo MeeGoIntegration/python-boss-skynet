@@ -227,48 +227,25 @@ class Exo(object):
         # Enter event loop with some trial at clean exit
 
         self.graceful_shutdown = False
-        while self.p.running():
-        #while True:
-            try:
-                # Install a handler
-                signal.signal(signal.SIGTERM, self.sighandler)
-                # Now ensure that system calls are restarted.  The
-                # handler won't be called until the system call
-                # returns
-                #
-                # mmm - actually this causes python to not exit the
-                # run() loop if the system is quiet. We should allow
-                # run to be re-startable and escalate from graceful to
-                # hard.
-                #
-                # signal.siginterrupt(signal.SIGTERM, False)
+        # Install a handler
+        signal.signal(signal.SIGTERM, self.sighandler)
+        # Now ensure that system calls are restarted.  The
+        # handler won't be called until the system call
+        # returns
+        #
+        # mmm - actually this causes python to not exit the
+        # run() loop if the system is quiet. We should allow
+        # run to be re-startable and escalate from graceful to
+        # hard.
+        #
+        # signal.siginterrupt(signal.SIGTERM, False)
 
-                self.log.info("Now starting ExoParticipant")
-                msg = WorkItemCtrl("start")
-                msg.config = self.config
-                self.handler.handle_lifecycle_control(msg)
-                self.p.run()
-                if self.graceful_shutdown:
-                    break
-
-            except KeyboardInterrupt:
-                logging.shutdown()
-                sys.exit(0)
-
-            except IOError:
-                self.log.debug("p.run() interrupted - IOError")
-                if self.graceful_shutdown:
-                    self.log.info("Now shutting down")
-                    self.handler.handle_lifecycle_control(WorkItemCtrl("die"))
-                    logging.shutdown()
-                    sys.exit(1)
-
-                self.log.info("Trying to shutdown gracefully")
-                self.handler.handle_lifecycle_control(WorkItemCtrl("stop"))
-                self.graceful_shutdown = True
-
-            except Exception:
-                self.log.debug("p.run() interrupted")
-                traceback.print_exc()
-                logging.shutdown()
-                sys.exit(1)
+        self.log.info("Now starting ExoParticipant")
+        msg = WorkItemCtrl("start")
+        msg.config = self.config
+        self.handler.handle_lifecycle_control(msg)
+        # p.run() handles all errors
+        self.p.run()
+        self.handler.handle_lifecycle_control(WorkItemCtrl("stop"))
+        logging.shutdown()
+        sys.exit(0)
