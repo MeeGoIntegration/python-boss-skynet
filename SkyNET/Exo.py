@@ -238,13 +238,14 @@ class Exo(object):
         # run to be re-startable and escalate from graceful to
         # hard.
         #
-        # signal.siginterrupt(signal.SIGTERM, False)
+        signal.siginterrupt(signal.SIGTERM, False)
 
         self.log.info("Now starting ExoParticipant")
         msg = WorkItemCtrl("start")
         msg.config = self.config
         self.handler.handle_lifecycle_control(msg)
         # p.run() handles all errors
+        # Exit when p.finish() is called from SIGTERM
         self.p.run()
         self.handler.handle_lifecycle_control(WorkItemCtrl("stop"))
         logging.shutdown()
