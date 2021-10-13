@@ -116,9 +116,7 @@ class Exo(object):
         sys.path.insert(0, self.codepath)
         p_namespace = importlib.import_module(self.code)
 
-        # Create an I woinstance
-        for key in ("name", "amqp_host", "amqp_user",
-                    "amqp_pwd", "amqp_vhost"):
+        for key in ("name", "amqp_host", "amqp_user", "amqp_vhost"):
             self.log.debug("%s : %s" % (key, getattr(self, key, "???")))
 
         # Complain if there is no ParticipantHandler class
