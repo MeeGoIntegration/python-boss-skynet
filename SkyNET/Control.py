@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-# -*- coding: utf-8; tab-width: 4 -*-
-
 class WorkItemCtrl(object):
     """
     Message object for workitems
@@ -13,9 +11,17 @@ class WorkItemCtrl(object):
     def __init__(self, msg):
         self.message = msg
 
-    def start(): return msg == "start"
-    def stop(): return msg == "stop"
-    def die(): return msg == "die"
+    def start(self):
+        return self.message == "start"
+
+    def stop(self):
+        return self.message == "stop"
+
+    def die(self):
+        return self.message == "die"
+
+    def __repr__(self):
+        return f"ctrl: {self.message}"
 
 
 class ParticipantCtrl:
