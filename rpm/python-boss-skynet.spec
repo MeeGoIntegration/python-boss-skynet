@@ -9,8 +9,8 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
 Prefix: %{_prefix}
 Obsoletes: boss-skynet < 0.6.0
 Provides: boss-skynet
-BuildRequires: python, python-distribute, supervisor
-Requires: python, python-ruote-amqp >= 2.1.0, python-amqplib, supervisor, python-setproctitle
+BuildRequires: python, python-distribute, supervisor < 4.0.0
+Requires: python, python-ruote-amqp >= 2.1.0, python-amqplib, supervisor < 4.0.0, python-setproctitle
 Requires(post): pwdutils
 BuildArch: noarch
 Vendor: David Greaves <david@dgreaves.com>
