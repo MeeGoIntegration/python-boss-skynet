@@ -9,11 +9,11 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
 Prefix: %{_prefix}
 Obsoletes: boss-skynet < 0.6.0
 Provides: boss-skynet
-BuildRequires: python3, supervisor >= 4.0.0
+BuildRequires: python3, (supervisor >= 4.0.0 or supervisor4)
 Requires: python3
 Requires: python3-ruote-amqp
 Requires: python3-pika
-Requires: supervisor >= 4.0.0
+Requires: (supervisor >= 4.0.0 or supervisor4)
 Requires: python3-setproctitle
 Requires(post): pwdutils
 BuildArch: noarch
@@ -55,7 +55,8 @@ fi
 %defattr(-,root,root)
 %{python_sitelib}/SkyNET
 %{python_sitelib}/*egg-info
-%{_datadir}/doc/%{name}
+# python3 setup.py install converts - to _ in this dir... FFS?
+%{_datadir}/doc/python3_boss_skynet
 %{_bindir}/skynet
 %{_bindir}/skynet_exo
 %config(noreplace) %{_sysconfdir}/skynet/skynet.conf
