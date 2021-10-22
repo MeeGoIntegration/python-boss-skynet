@@ -35,27 +35,6 @@ class ParticipantConfigError(RuntimeError):
             (opt, section, reason))
 
 
-def workitem_summary(wid):
-    parts = ["Taking workitem"]
-    if wid.fields.ev and wid.fields.ev.id:
-        parts.append("#%s" % wid.fields.ev.id)
-    if wid.fields.project:
-        parts.append("for %s" % wid.fields.project)
-    # Put a colon after whatever we got so far
-    parts = [' '.join(parts) + ":"]
-    if wid.participant_name:
-        parts.append(wid.participant_name)
-    if wid.params:
-        for key, value in list(wid.params.as_dict().items()):
-            # Remove some uninteresting parameters from the log
-            if key in ['participant_options', 'if']:
-                continue
-            if key == 'ref' and wid.participant_name:
-                continue
-            parts.append("%s=%s" % (key, repr(value)))
-    return ' '.join(parts)
-
-
 class Exo(object):
     """
     The Exo class provides the SkyNET participant exoskeleton.  This
